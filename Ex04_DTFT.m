@@ -1,0 +1,46 @@
+clc;
+clear all;
+close all;
+n = -1:4;
+x = [1, 2, 3, 4, 5,0];
+k = 0:500;
+subplot(5, 1, 1);
+stem(n, x, 'k');
+xlabel('Sample Index (n)');
+ylabel('Amplitude');
+title('Sample Signal');
+grid on;
+omega = (pi/500) * k;
+X = zeros(1, length(k));
+for i = 1:length(k)
+    X(i) = sum(x .* exp(-1i * omega(i) * n));
+end
+magnitude = abs(X);
+phase = angle(X);
+realpart = real(X);
+imaginary = imag(X);
+subplot(5, 1, 2);
+plot(omega, magnitude, 'k');
+xlabel('Frequency (radians)');
+ylabel('Magnitude');
+title('Magnitude Part');
+grid on;
+subplot(5, 1, 3);
+plot(omega, phase, 'k');
+xlabel('Frequency (radians)');
+ylabel('Phase (radians)');
+title('Phase Part');
+grid on;
+subplot(5, 1, 4);
+plot(omega, realpart, 'k');
+xlabel('Frequency (radians)');
+ylabel('Real Part');
+title('Real Part');
+grid on;
+subplot(5, 1, 5);
+plot(omega, imaginary, 'k');
+xlabel('Frequency (radians)');
+ylabel('Imaginary Part');
+title('Imaginary Part');
+grid on;
+sgtitle('Sample Sequence and DTFT of Sample Signal.')
